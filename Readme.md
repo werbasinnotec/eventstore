@@ -1,0 +1,83 @@
+# Eventstorage
+
+Eventstorage is a modul to save events by aggregate and aggregateID. 
+
+## Usage
+
+### ENV Variables:
+
+-MDBHANDLER_CONSTRING: Defines the connectionstring to the database. Default is: 'mongodb://localhost:27017/mdbtest';
+
+### Start the Eventstore:
+
+```
+const es = require('innotec-eventstore');
+
+const options = {
+  mdbConString: 'localhost',                  // Connectionstring to MongoDB
+  eventsCollectionName: 'events',             // Optional - The collection name of the events
+  snapShotCollectionName: 'snapshots',        // Optional - The collection name of the snapshots
+  transactionsCollectionName: 'transactions'  // Optional - The collection name of the transactions
+};
+
+const store = es.start(options);
+```
+
+### Save an events
+
+```
+const event = {
+  aggregateID: 'ABC',
+  aggregate: 'billing',
+  context: 'customer',
+  payload: {
+    name: 'Wiesmüller',
+    firstname: 'Martin'
+  }
+}
+
+store.saveEvent(event);
+```
+
+### Create a global snapshot
+
+To create a snaphshot through all the transactions you can use:
+
+```
+store.createGlobalSnapshot();
+```
+
+### Create a snapshot by aggregateID
+
+To create a snaphsot by a aggregateID use:
+
+```
+store.createAggregateSnapshot('ABC');
+```
+
+### Get Information between a range by AggregateID
+
+```
+const aggregateID = 'ABC';
+const min = 1489259072; // Timestamp min
+const max = 1489759072; // Timestamp max
+
+store.getAggregateInformationbyRange(aggregateID, { min max })
+```
+
+
+### Get the last Information by AggregateID
+
+```
+const aggregateID = 'ABC';
+
+store.getLastAggregateInformation(aggregateID)
+```
+
+### Get all Information by Aggregate name
+
+```
+const aggregate = 'billing';
+
+store.getCompleteAggregateInformation(aggregate);
+```
