@@ -27,11 +27,13 @@
     "loadash": "0.0.1",
     "moment": "2.17.1",
     "mongodb-handler": "0.2.2",
+    "node-schedule": "1.2.1",
     "processenv": "0.1.1",
     "snooper": "0.0.6",
     "util": "0.10.3"
   },
   "devDependencies": {
+    "assertthat": "0.8.5",
     "gulp": "3.9.1",
     "gulp-coverage": "0.3.38",
     "gulp-eslint": "3.0.1",
