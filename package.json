@@ -1,0 +1,41 @@
+{
+  "name": "eventstore",
+  "version": "0.0.1",
+  "description": "Eventstore is a easy module to save events by an aggregate ID",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/werbasinnotec/eventstore.git"
+  },
+  "keywords": [
+    "Eventstore",
+    "CQRS",
+    "DDD"
+  ],
+  "author": "Martin Wiesmüller <martin.wiesmueller@werbas-ag.com> (werbasinnotec.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/werbasinnotec/eventstore/issues"
+  },
+  "homepage": "https://github.com/werbasinnotec/eventstore#readme",
+  "dependencies": {
+    "events": "1.1.1",
+    "guid": "0.0.12",
+    "loadash": "0.0.1",
+    "moment": "2.17.1",
+    "mongodb-handler": "0.2.2",
+    "processenv": "0.1.1",
+    "snooper": "0.0.6",
+    "util": "0.10.3"
+  },
+  "devDependencies": {
+    "gulp": "3.9.1",
+    "gulp-coverage": "0.3.38",
+    "gulp-eslint": "3.0.1",
+    "gulp-mocha": "4.1.0",
+    "gulp-shell": "0.6.3"
+  }
+}
