@@ -18,7 +18,12 @@ const options = {
   rawDataCollectionName: 'rawdata',           // Optional - The collection name for the raw data
   eventsCollectionName: 'events',             // Optional - The collection name for the events
   snapShotCollectionName: 'snapshots',        // Optional - The collection name for the snapshots
-  transactionsCollectionName: 'transactions'  // Optional - The collection name for the transactions
+  transactionsCollectionName: 'transactions', // Optional - The collection name for the transactions
+  globalSnapshotScheduler: {                  // Optional - Defines the time when the scheduler runs the global Snapshot
+    hour: 3,
+    minute: 1,
+    second: 0
+  }
 };
 
 const store = es.start(options);
