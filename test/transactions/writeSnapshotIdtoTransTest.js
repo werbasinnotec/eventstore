@@ -33,7 +33,7 @@ describe('writeSnapshotidtoTrans...', () => {
   });
 
   it('... calbacks true when process is done', (done) => {
-    createNewTransaction('KJsfsdkjnfJKFNksdf', 'person', (err) => {
+    createNewTransaction('billing', 'KJsfsdkjnfJKFNksdf', 'person', (err) => {
       if (err) {
         throw err;
       }
