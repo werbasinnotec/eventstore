@@ -3,7 +3,7 @@
 const assert = require('assertthat');
 const mdbhandler = require('mongodb-handler');
 
-const checkifTransactionFamous = require('../../lib/events/checkifTransactionFamous');
+const checkifTransactionFamous = require('../../lib/transactions/checkifTransactionFamous');
 
 describe('checkifTransactionFamous...', () => {
   it('... is of type function', (done) => {
