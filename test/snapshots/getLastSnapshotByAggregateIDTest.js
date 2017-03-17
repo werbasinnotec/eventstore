@@ -25,7 +25,7 @@ describe('getLastSnapshotByAggregateID...', () => {
     const aggregateID = new ObjectID('58ca7134e872cb274a3bc163');
 
     for (let i = 0; i < 10; i++) {
-      testdata.push({ timestamp: moment().unix(), aggregateID, payload: { foo: 'bar', count: i }});
+      testdata.push({ timestamp: moment().unix(), aggregateID, lastEventID: 'TEST', payload: { foo: 'bar', count: i }});
     }
 
     mdbhandler.bulk({ collection: 'snapshots', doc: testdata }, (err) => {

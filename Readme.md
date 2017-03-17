@@ -14,7 +14,6 @@ Eventstorage is a modul to save events by aggregate and aggregateID.
 const es = require('innotec-eventstore');
 
 const options = {
-  mdbConString: 'localhost',                  // Connectionstring to MongoDB
   rawDataCollectionName: 'rawdata',           // Optional - The collection name for the raw data
   eventsCollectionName: 'events',             // Optional - The collection name for the events
   snapShotCollectionName: 'snapshots',        // Optional - The collection name for the snapshots

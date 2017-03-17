@@ -1,5 +1,5 @@
 {
-  "name": "eventstore",
+  "name": "innotec-eventstore",
   "version": "0.0.1",
   "description": "Eventstore is a easy module to save events by an aggregate ID",
   "main": "lib/index.js",
@@ -22,15 +22,15 @@
   },
   "homepage": "https://github.com/werbasinnotec/eventstore#readme",
   "dependencies": {
-    "events": "1.1.1",
     "guid": "0.0.12",
-    "loadash": "0.0.1",
+    "lodash": "4.17.4",
+    "merge": "1.2.0",
     "moment": "2.17.1",
-    "mongodb-handler": "0.2.2",
+    "mongodb-handler": "1.0.2",
+    "node-cache": "4.1.1",
     "node-schedule": "1.2.1",
     "processenv": "0.1.1",
-    "snooper": "0.0.6",
-    "util": "0.10.3"
+    "snooper": "0.0.6"
   },
   "devDependencies": {
     "assertthat": "0.8.5",

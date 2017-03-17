@@ -25,7 +25,7 @@ describe('getlastEventbyAggregateId...', () => {
     const aggregateID = new ObjectID('584e6be23ace6099b9f02869');
 
     for (let i = 0; i < 10; i++) {
-      testdata.push({ timestamp: moment().unix(), aggregateID, payload: { foo: 'bar', count: i }});
+      testdata.push({ timestamp: moment().unix(), aggregateID, aggregate: 'billing', context: 'customer', revision: i, payload: { foo: 'bar', count: i }});
     }
 
     mdbhandler.bulk({ collection: 'events', doc: testdata }, (err) => {

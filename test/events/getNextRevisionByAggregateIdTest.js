@@ -50,7 +50,7 @@ describe('getNextRevisionByAggregateId...', () => {
   it('... must callback 0 when a snapshot is created after the events', (done) => {
     const aggregateID = new ObjectID('58ca9c945445f12eb467beae');
 
-    mdbhandler.insert({ collection: 'snapshots', doc: { timestamp: 1489673374, aggregateID, payload: { foo: 'bar', count: 55 }}}, (err) => {
+    mdbhandler.insert({ collection: 'snapshots', doc: { timestamp: 1489673374, aggregateID, lastEventID: 'TEST', payload: { foo: 'bar', count: 55 }}}, (err) => {
       if (err) {
         throw err;
       }

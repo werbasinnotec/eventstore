@@ -24,21 +24,21 @@ describe('saveEvent...', () => {
   });
 
   it('... callbacks an error when no aggreagateID is defined in the object', (done) => {
-    saveEvent({ aggregateID: 'ABC' }, (err) => {
+    saveEvent({ aggregateID: '58cc4fb453d1ae58de792f27' }, (err) => {
       assert.that(err).is.equalTo('Function is called without aggregate');
       done();
     });
   });
 
   it('... callbacks an error when no payload is defined in the object', (done) => {
-    saveEvent({ aggregateID: 'ABC', aggregate: 'billing' }, (err) => {
+    saveEvent({ aggregateID: '58cc4fb453d1ae58de792f27', aggregate: 'billing' }, (err) => {
       assert.that(err).is.equalTo('Function is called without payload');
       done();
     });
   });
 
   it('... callbacks true when event is saved', (done) => {
-    saveEvent({ aggregateID: 'DEE', aggregate: 'billing', context: 'active', payload: { foo: 'bar' }}, (err, res) => {
+    saveEvent({ aggregateID: '58cc4fb453d1ae58de792f27', aggregate: 'billing', context: 'active', payload: { foo: 'bar' }}, (err, res) => {
       if (err) {
         throw err;
       }
@@ -49,7 +49,7 @@ describe('saveEvent...', () => {
   });
 
   it('... callbacks true when event is saved - again', (done) => {
-    saveEvent({ aggregateID: 'DEE', aggregate: 'billing', context: 'active', payload: { foo: 'bar' }}, (err, res) => {
+    saveEvent({ aggregateID: '58cc4fb453d1ae58de792f27', aggregate: 'billing', context: 'active', payload: { foo: 'bar' }}, (err, res) => {
       if (err) {
         throw err;
       }

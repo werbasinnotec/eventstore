@@ -24,21 +24,21 @@ describe('createEventObject...', () => {
   });
 
   it('... callbacks an error when no aggreagateID is defined in the object', (done) => {
-    createEventObject({ aggregateID: 'ABC' }, (err) => {
+    createEventObject({ aggregateID: '58cc4fb453d1ae58de792f31' }, (err) => {
       assert.that(err).is.equalTo('Function is called without aggregate');
       done();
     });
   });
 
   it('... callbacks an error when no payload is defined in the object', (done) => {
-    createEventObject({ aggregateID: 'ABC', aggregate: 'billing' }, (err) => {
+    createEventObject({ aggregateID: '58cc4fb453d1ae58de792f31', aggregate: 'billing' }, (err) => {
       assert.that(err).is.equalTo('Function is called without payload');
       done();
     });
   });
 
   it('... callbacks an object when process is done', (done) => {
-    createEventObject({ aggregateID: 'ABC', aggregate: 'billing', payload: { foo: 'bar' }}, (err, eventObj) => {
+    createEventObject({ aggregateID: '58cc4fb453d1ae58de792f31', aggregate: 'billing', payload: { foo: 'bar' }}, (err, eventObj) => {
       if (err) {
         throw err;
       }

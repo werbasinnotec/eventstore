@@ -1,0 +1,11 @@
+{
+  "rawDataCollectionName": "rawdata",
+  "eventsCollectionName": "events",
+  "snapShotCollectionName": "snapshots",
+  "transactionsCollectionName": "transactions",
+  "globalSnapshotScheduler": {
+    "hour": 3,
+    "minute": 1,
+    "second": 0
+  }
+}
