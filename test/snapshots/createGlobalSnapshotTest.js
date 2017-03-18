@@ -15,8 +15,6 @@ describe('createGlobalSnapshot...', () => {
   it('... create TestData', (done) => {
     const obj = [];
     let deleted;
-    let testkey;
-    let supertestkey;
     let testcount;
 
     for (let i = 0; i < 1500; i++) {

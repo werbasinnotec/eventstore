@@ -99,6 +99,46 @@ describe('Testing Eventstoremodule....', () => {
       assert.that(es.createGlobalSnapshot).is.ofType('function');
       done();
     });
+
+    it('... create Testdata', (done) => {
+      let i = 0;
+      let count;
+
+      const create = () => {
+        if (i === 0) {
+          count = 6000;
+        } else {
+          count = -1;
+        }
+
+        es.saveEvent({ aggregateID: '58cd00d657d9ff5ac701f263', aggregate: 'billing', context: 'person', payload: { name: 'Martin', lastname: 'Wiesmüller', married: true, count }}, (err1) => {
+          if (err1) {
+            throw err1;
+          }
+
+          i++;
+
+          if (i < 5000) {
+            setTimeout(create, 0);
+          } else {
+            done();
+          }
+        });
+      };
+
+      create();
+    });
+
+    it('... callbacks true when process is done', (done) => {
+      es.createGlobalSnapshot((err, res) => {
+        if (err) {
+          throw err;
+        }
+
+        assert.that(res).is.true();
+        done();
+      });
+    });
   });
 
   describe('.... subfunction createAggregateSnapshot ....', () => {
