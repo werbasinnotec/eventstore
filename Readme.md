@@ -71,12 +71,12 @@ store.getAggregateInformationbyRange(aggregateID, { min max })
 ```
 
 
-### Get the last Information by AggregateID
+### Get the actual Information by AggregateID
 
 ```
 const aggregateID = 'ABC';
 
-store.getLastAggregateInformation(aggregateID)
+store.getActualAggregateInformation(aggregateID)
 ```
 
 ### Get all Information by Aggregate name
