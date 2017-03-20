@@ -7,45 +7,45 @@ const ObjectID = require('mongodb').ObjectID;
 
 const testData = [
   { aggregateID: new ObjectID('58c7cacd58c3b54cf2b56f76'),
-    aggregate: "billing",
-    payload : {
-      name : 'Frank'
+    aggregate: 'billing',
+    payload: {
+      name: 'Frank'
     },
-    context : "person",
-    revision : 1,
-    timestamp : 1490001056
+    context: 'person',
+    revision: 1,
+    timestamp: 1490001056
   },
   { aggregateID: new ObjectID('58c7cacd58c3b54cf2b56f76'),
-    aggregate: "billing",
-    payload : {
-      name : 'Frank',
+    aggregate: 'billing',
+    payload: {
+      name: 'Frank',
       lastname: 'Sinatra'
     },
-    context : "person",
-    revision : 2,
-    timestamp : 1490002056
+    context: 'person',
+    revision: 2,
+    timestamp: 1490002056
   },
   { aggregateID: new ObjectID('58c7cacd58c3b54cf2b56f76'),
-    aggregate: "billing",
-    payload : {
+    aggregate: 'billing',
+    payload: {
       address: {
         street: 'Frankenstreet'
       }
     },
-    context : "person",
-    revision : 3,
-    timestamp : 1490003056
+    context: 'person',
+    revision: 3,
+    timestamp: 1490003056
   },
   { aggregateID: new ObjectID('58c7cacd58c3b54cf2b56f76'),
-    aggregate: "billing",
-    payload : {
+    aggregate: 'billing',
+    payload: {
       status: {
         married: true
       }
     },
-    context : "person",
-    revision : 4,
-    timestamp : 1490004056
+    context: 'person',
+    revision: 4,
+    timestamp: 1490004056
   }
 ];
 
@@ -104,7 +104,7 @@ describe('getEventsbyRange...', () => {
       }
 
       done();
-    })
+    });
   });
 
   it('... callbacks the correct complete data', (done) => {
@@ -113,7 +113,6 @@ describe('getEventsbyRange...', () => {
         throw err;
       }
 
-      console.log(res)
       assert.that(res.length).is.equalTo(4);
       done();
     });
@@ -125,7 +124,6 @@ describe('getEventsbyRange...', () => {
         throw err;
       }
 
-      console.log(res)
       assert.that(res.length).is.equalTo(3);
       done();
     });
