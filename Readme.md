@@ -35,14 +35,21 @@ const event = {
   aggregateID: 'ABC',
   aggregate: 'billing',
   context: 'customer',
+  hardwrite: false,
   payload: {
     name: 'Wiesmüller',
     firstname: 'Martin'
   }
 }
 
-store.saveEvent(event);
+store.saveEvent(event, (err) => {
+  if (err) {
+    throw err;
+  }
+});
 ```
+
+- hardwrite Option: Usually all number fields the system will calc. Set it to true to disable it.
 
 ### Create a global snapshot
 
@@ -76,7 +83,7 @@ store.getAggregateInformationbyRange(aggregateID, { min max })
 ```
 const aggregateID = 'ABC';
 
-store.getActualAggregateInformation(aggregateID)
+store.getActualAggregateIDInformation(aggregateID)
 ```
 
 ### Get all Information by Aggregate name
