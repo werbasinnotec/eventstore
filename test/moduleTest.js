@@ -265,9 +265,9 @@ describe('Testing Eventstoremodule....', () => {
     });
   });
 
-  describe('.... subfunction getAggregateInformationbyRange ....', () => {
+  describe('.... subfunction getAggregateIDInformationbyRange ....', () => {
     it('... is of type function', (done) => {
-      assert.that(es.getAggregateInformationbyRange).is.ofType('function');
+      assert.that(es.getAggregateIDInformationbyRange).is.ofType('function');
       done();
     });
   });

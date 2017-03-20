@@ -1,0 +1,22 @@
+machine:
+  timezone: Europe/Berlin
+
+  node:
+    version: 7.5.0
+
+dependencies:
+  cache_directories:
+    - mongodb-linux-x86_64-2.6.4
+
+  pre:
+    - sudo apt-get install mongodb
+    - npm install -g gulp
+    - npm install
+
+general:
+  artifacts:
+    - "coverage"
+
+test:
+  override:
+    - gulp test

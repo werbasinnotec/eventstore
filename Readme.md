@@ -56,7 +56,11 @@ store.saveEvent(event, (err) => {
 To create a snaphshot through all the transactions you can use:
 
 ```
-store.createGlobalSnapshot();
+store.createGlobalSnapshot((err) => {
+  if (err) {
+    throw err;
+  }
+});
 ```
 
 ### Create a snapshot by aggregateID
@@ -64,7 +68,11 @@ store.createGlobalSnapshot();
 To create a snaphsot by a aggregateID use:
 
 ```
-store.createAggregateSnapshot('ABC');
+store.createAggregateSnapshot('ABC', (err) => {
+  if (err) {
+    throw err;
+  }
+});
 ```
 
 ### Get Information between a range by AggregateID
@@ -74,7 +82,7 @@ const aggregateID = 'ABC';
 const min = 1489259072; // Timestamp min
 const max = 1489759072; // Timestamp max
 
-store.getAggregateInformationbyRange(aggregateID, { min max })
+store.getAggregateIDInformationbyRange(aggregateID, { min max })
 ```
 
 
