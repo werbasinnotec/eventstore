@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/werbasinnotec/eventstore#readme",
   "dependencies": {
+    "flaschenpost": "0.15.6",
     "guid": "0.0.12",
     "lodash": "4.17.4",
     "merge": "1.2.0",

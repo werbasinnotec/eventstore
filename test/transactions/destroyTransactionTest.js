@@ -18,7 +18,7 @@ describe('destroyTransaction...', () => {
   });
 
   it('... callbacks true when process is done', (done) => {
-    const obj = { aggregateID: '58c7ca8f58c3b54cf2b56ea4', aggregate: 'billing', context: 'active', payload: { foo: 'bar' }}
+    const obj = { aggregateID: '58c7ca8f58c3b54cf2b56ea4', aggregate: 'billing', context: 'active', payload: { foo: 'bar' }};
 
     saveEvent(obj, (err) => {
       if (err) {
