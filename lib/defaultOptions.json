@@ -4,8 +4,8 @@
   "snapShotCollectionName": "snapshots",
   "transactionsCollectionName": "transactions",
   "globalSnapshotScheduler": {
-    "hour": 3,
-    "minute": 1,
+    "hour": 03,
+    "minute": 01,
     "second": 0
   }
 }
