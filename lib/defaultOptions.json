@@ -1,5 +1,4 @@
 {
-  "rawDataCollectionName": "rawdata",
   "eventsCollectionName": "events",
   "snapShotCollectionName": "snapshots",
   "transactionsCollectionName": "transactions",

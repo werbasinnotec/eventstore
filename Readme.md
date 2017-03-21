@@ -14,7 +14,6 @@ Eventstorage is a modul to save events by aggregate and aggregateID.
 const es = require('innotec-eventstore');
 
 const options = {
-  rawDataCollectionName: 'rawdata',           // Optional - The collection name for the raw data
   eventsCollectionName: 'events',             // Optional - The collection name for the events
   snapShotCollectionName: 'snapshots',        // Optional - The collection name for the snapshots
   transactionsCollectionName: 'transactions', // Optional - The collection name for the transactions
@@ -60,6 +59,10 @@ store.createGlobalSnapshot((err) => {
   if (err) {
     throw err;
   }
+  .
+  .
+  .
+  .
 });
 ```
 
@@ -72,6 +75,9 @@ store.createAggregateSnapshot('ABC', (err) => {
   if (err) {
     throw err;
   }
+  .
+  .
+  .
 });
 ```
 
@@ -82,7 +88,14 @@ const aggregateID = 'ABC';
 const min = 1489259072; // Timestamp min
 const max = 1489759072; // Timestamp max
 
-store.getAggregateIDInformationbyRange(aggregateID, { min max })
+store.getAggregateIDInformationbyRange(aggregateID, { min max }, (err) => {
+  if (err) {
+    throw err;
+  }
+  .
+  .
+  .
+});
 ```
 
 
@@ -91,7 +104,13 @@ store.getAggregateIDInformationbyRange(aggregateID, { min max })
 ```
 const aggregateID = 'ABC';
 
-store.getActualAggregateIDInformation(aggregateID)
+store.getActualAggregateIDInformation(aggregateID, (err, res) => {
+  if (err) {
+    throw err;
+  }
+
+  console.log(res);
+});
 ```
 
 ### Get all Information by Aggregate name
@@ -99,5 +118,11 @@ store.getActualAggregateIDInformation(aggregateID)
 ```
 const aggregate = 'billing';
 
-store.getCompleteAggregateInformation(aggregate);
+store.getCompleteAggregateInformation(aggregate, (err, res) => {
+  if (err) {
+    throw err;
+  }
+
+  console.log(res);
+});
 ```
