@@ -127,3 +127,21 @@ store.getCompleteAggregateInformation(aggregate, (err, res) => {
   console.log(res);
 });
 ```
+
+### Destroy an aggregateID
+
+This method destroy the transaction to an aggregateID.
+
+```
+const aggregateID = 'ABC';
+
+store.destroyAggregateID(aggregateID, (err) => {
+  if (err) {
+    throw err;
+  }
+
+  .
+  .
+  .
+});
+```
