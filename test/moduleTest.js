@@ -111,7 +111,7 @@ describe('Testing Eventstoremodule....', () => {
           count = -1;
         }
 
-        es.saveEvent({ aggregateID: '58cd00d657d9ff5ac701f263', aggregate: 'billing', context: 'person', payload: { name: 'Martin', lastname: 'Wiesmüller', married: true, count }}, (err1) => {
+        es.saveEvent({ aggregateID: '58cd00d657d9ff5ac701f263', aggregate: 'billing', context: 'person', payload: { name: 'Michael', lastname: 'Bauer', married: true, count }}, (err1) => {
           if (err1) {
             throw err1;
           }
