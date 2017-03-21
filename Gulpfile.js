@@ -39,10 +39,6 @@ gulp.task('coverage', function () {
   process.env.LOG_LEVELS = 'info';
 
   return gulp.src(paths.tests, { read: false }).
-    pipe(cover.instrument({
-      pattern: [ 'test/testPattern.js' ],
-      debugDirectory: './debug'
-    })).
     pipe(mocha({ timeout: 15000 })).
     pipe(cover.gather()).
     pipe(cover.format({ reporter: 'html', outFile: 'coverage.html' }, { reporter: 'json', outFile: 'coverage.json' })).
