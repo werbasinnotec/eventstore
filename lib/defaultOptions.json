@@ -1,4 +1,5 @@
 {
+  "maxEventsbyAggregateID": 300,
   "eventsCollectionName": "events",
   "snapShotCollectionName": "snapshots",
   "transactionsCollectionName": "transactions",

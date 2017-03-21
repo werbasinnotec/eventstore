@@ -14,6 +14,7 @@ Eventstorage is a modul to save events by aggregate and aggregateID.
 const es = require('innotec-eventstore');
 
 const options = {
+  maxEventsbyAggregateID: 300,                // Optional - Defines the max count of events by a aggregateID. Over this the system will create a snapshot.
   eventsCollectionName: 'events',             // Optional - The collection name for the events
   snapShotCollectionName: 'snapshots',        // Optional - The collection name for the snapshots
   transactionsCollectionName: 'transactions', // Optional - The collection name for the transactions
