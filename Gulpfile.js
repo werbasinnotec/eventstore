@@ -7,7 +7,7 @@ const mocha = require('gulp-mocha');
 const shell = require('gulp-shell');
 
 const paths = {
-  analyze: [ '**/*.js', '!coverage/**/*.js', '!test/testPattern.js' ],
+  analyze: [ '**/*.js', '!example/**/*.js', '!coverage/**/*.js', '!test/testPattern.js' ],
   tests: [ 'test/**/*Test.js', '!coverage/**/*.js' ]
 };
 
