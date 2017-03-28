@@ -22,9 +22,12 @@ describe('getNextRevisionByAggregateId...', () => {
   it('... create TestData', (done) => {
     const testdata = [];
     const aggregateID = new ObjectID('58ca9c945445f12eb467beae');
+    let timestamp = 1489673364;
 
     for (let i = 0; i < 10; i++) {
-      testdata.push({ timestamp: 1489673364, aggregateID, aggregate: 'billing', context: 'person', revision: i, payload: { foo: 'bar', count: i }});
+      timestamp++;
+
+      testdata.push({ timestamp, aggregateID, aggregate: 'billing', context: 'person', revision: i, payload: { foo: 'bar', count: i }});
     }
 
     mdbhandler.bulk({ collection: 'events', doc: testdata }, (err) => {
@@ -49,8 +52,9 @@ describe('getNextRevisionByAggregateId...', () => {
 
   it('... must callback 0 when a snapshot is created after the events', (done) => {
     const aggregateID = new ObjectID('58ca9c945445f12eb467beae');
+    const timestamp = 1489973364;
 
-    mdbhandler.insert({ collection: 'snapshots', doc: { timestamp: 1489673374, aggregateID, lastEventID: 'TEST', payload: { foo: 'bar', count: 55 }}}, (err) => {
+    mdbhandler.insert({ collection: 'snapshots', doc: { timestamp, aggregateID, lastEventID: 'TEST', payload: { foo: 'bar', count: 55 }}}, (err) => {
       if (err) {
         throw err;
       }
@@ -69,9 +73,11 @@ describe('getNextRevisionByAggregateId...', () => {
   it('... create TestData again', (done) => {
     const testdata = [];
     const aggregateID = new ObjectID('58ca9c945445f12eb467beae');
+    let timestamp = 1589973364;
 
     for (let i = 0; i < 30; i++) {
-      testdata.push({ timestamp: 1489673394, aggregateID, aggregate: 'billing', context: 'person', revision: i, payload: { foo: 'bar', count: i }});
+      timestamp++;
+      testdata.push({ timestamp, aggregateID, aggregate: 'billing', context: 'person', revision: i, payload: { foo: 'bar', count: i }});
     }
 
     mdbhandler.bulk({ collection: 'events', doc: testdata }, (err) => {
