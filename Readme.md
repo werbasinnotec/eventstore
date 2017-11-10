@@ -8,7 +8,7 @@ Eventstorage is a modul to save events by aggregate and aggregateID.
 
 -MDBHANDLER_CONSTRING: Defines the connectionstring to the database. Default is: 'mongodb://localhost:27017/mdbtest';
 
-### Start the Eventstore:
+### Start the eventstore:
 
 ```
 const es = require('innotec-eventstore');
@@ -28,7 +28,7 @@ const options = {
 const store = es.start(options);
 ```
 
-### Save an events
+### Save an event
 
 ```
 const event = {
@@ -82,7 +82,7 @@ store.createAggregateSnapshot('ABC', (err) => {
 });
 ```
 
-### Get Information between a range by AggregateID
+### Get information between a range by aggregateID
 
 ```
 const aggregateID = 'ABC';
@@ -100,7 +100,7 @@ store.getAggregateIDInformationbyRange(aggregateID, { min max }, (err) => {
 ```
 
 
-### Get the actual Information by AggregateID
+### Get the actual information by aggregateID
 
 ```
 const aggregateID = 'ABC';
@@ -114,7 +114,7 @@ store.getActualAggregateIDInformation(aggregateID, (err, res) => {
 });
 ```
 
-### Get all Information by Aggregate name
+### Get all information by aggregate name
 
 ```
 const aggregate = 'billing';
