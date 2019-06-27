@@ -1,6 +1,6 @@
 {
   "name": "innotec-eventstore",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Eventstore is a easy module to save events by an aggregate ID",
   "main": "lib/index.js",
   "scripts": {
@@ -22,24 +22,24 @@
   },
   "homepage": "https://github.com/werbasinnotec/eventstore#readme",
   "dependencies": {
-    "flaschenpost": "0.15.6",
+    "flaschenpost": "2.1.0",
     "guid": "0.0.12",
-    "lodash": "4.17.4",
-    "merge": "1.2.0",
-    "moment": "2.18.1",
-    "mongodb": "2.2.25",
-    "mongodb-handler": "1.1.0",
-    "node-cache": "4.1.1",
-    "node-schedule": "1.2.1",
-    "processenv": "0.1.1",
+    "lodash": "4.17.11",
+    "merge": "1.2.1",
+    "moment": "2.24.0",
+    "mongodb": "3.2.7",
+    "mongodb-handler": "2.0.2",
+    "node-cache": "4.2.0",
+    "node-schedule": "1.3.2",
+    "processenv": "1.1.0",
     "snooper": "0.0.6"
   },
   "devDependencies": {
-    "assertthat": "0.8.5",
-    "gulp": "3.9.1",
+    "assertthat": "3.1.0",
+    "gulp": "4.0.2",
     "gulp-coverage": "0.3.38",
-    "gulp-eslint": "3.0.1",
-    "gulp-mocha": "4.1.0",
-    "gulp-shell": "0.6.3"
+    "gulp-eslint": "5.0.0",
+    "gulp-mocha": "6.0.0",
+    "gulp-shell": "0.7.1"
   }
 }
