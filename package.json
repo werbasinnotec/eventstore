@@ -1,10 +1,10 @@
 {
   "name": "innotec-eventstore",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Eventstore is a easy module to save events by an aggregate ID",
   "main": "lib/index.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp lint && gulp test"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "node-cache": "4.2.0",
     "node-schedule": "1.3.2",
     "processenv": "1.1.0",
+    "require-dir": "1.2.0",
     "snooper": "0.0.6"
   },
   "devDependencies": {

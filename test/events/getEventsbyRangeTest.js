@@ -1,131 +1,105 @@
 'use strict';
 
 const assert = require('assertthat');
-const getEventsbyRange = require('../../lib/events/getEventsbyRange');
-const mdbhandler = require('mongodb-handler');
 const ObjectID = require('mongodb').ObjectID;
+const path = require('path');
+const database = require(path.resolve('./lib/database'));
+const events = require(path.resolve('./lib/events'));
+const moment = require('moment');
 
-const testData = [
-  { aggregateID: new ObjectID('58c7cacd58c3b54cf2b56f76'),
-    aggregate: 'billing',
-    payload: {
-      name: 'Frank'
-    },
-    context: 'person',
-    revision: 1,
-    timestamp: 1490001056
-  },
-  { aggregateID: new ObjectID('58c7cacd58c3b54cf2b56f76'),
-    aggregate: 'billing',
-    payload: {
-      name: 'Frank',
-      lastname: 'Sinatra'
-    },
-    context: 'person',
-    revision: 2,
-    timestamp: 1490002056
-  },
-  { aggregateID: new ObjectID('58c7cacd58c3b54cf2b56f76'),
-    aggregate: 'billing',
-    payload: {
-      address: {
-        street: 'Frankenstreet'
-      }
-    },
-    context: 'person',
-    revision: 3,
-    timestamp: 1490003056
-  },
-  { aggregateID: new ObjectID('58c7cacd58c3b54cf2b56f76'),
-    aggregate: 'billing',
-    payload: {
-      status: {
-        married: true
-      }
-    },
-    context: 'person',
-    revision: 4,
-    timestamp: 1490004056
-  }
-];
-
-describe('getEventsbyRange...', () => {
+describe('getEventsByRange...', () => {
   it('... is of type function', (done) => {
-    assert.that(getEventsbyRange).is.ofType('function');
+    assert.that(events.getEventsByRange).is.ofType('function');
     done();
   });
 
-  it('... callbacks an error when AggregateID is not defined', (done) => {
-    getEventsbyRange(undefined, undefined, undefined, (err) => {
-      assert.that(err).is.equalTo('Function is called without aggregateID');
-      done();
-    });
+  it('... rejects an error when aggregateId is not defined', (done) => {
+    (async () => {
+      try {
+        await events.getEventsByRange();
+      } catch (err) {
+        assert.that(err).is.equalTo('Function is called withot a aggregateId');
+        done();
+      }
+    })();
   });
 
-  it('... callbacks an error when min is not defined', (done) => {
-    getEventsbyRange('ABC', undefined, undefined, (err) => {
-      assert.that(err).is.equalTo('Error in typof min parameter. Parameter is missing or in not correct format');
-      done();
-    });
+  it('... rejects an error when min is not defined', (done) => {
+    (async () => {
+      try {
+        await events.getEventsByRange('abc');
+      } catch (err) {
+        assert.that(err).is.equalTo('Function is called without min value or value is not a ISO 8601 timestamp');
+        done();
+      }
+    })();
   });
 
-  it('... callbacks an error when min is not in correct format number', (done) => {
-    getEventsbyRange('ABC', 'ABC', undefined, (err) => {
-      assert.that(err).is.equalTo('Error in typof min parameter. Parameter is missing or in not correct format');
-      done();
-    });
+  it('... rejects an error when min is not a ISO 8601 timestamp', (done) => {
+    (async () => {
+      try {
+        await events.getEventsByRange('abc', '123');
+      } catch (err) {
+        assert.that(err).is.equalTo('Function is called without min value or value is not a ISO 8601 timestamp');
+        done();
+      }
+    })();
   });
 
-  it('... callbacks an error when max is not defined', (done) => {
-    getEventsbyRange('ABC', 1, undefined, (err) => {
-      assert.that(err).is.equalTo('Error in typof min parameter. Parameter is missing or in not correct format');
-      done();
-    });
+  it('... rejects an error when max is not a defined', (done) => {
+    (async () => {
+      try {
+        await events.getEventsByRange('abc', moment().toISOString());
+      } catch (err) {
+        assert.that(err).is.equalTo('Function is called without max value or value is not a ISO 8601 timestamp');
+        done();
+      }
+    })();
   });
 
-  it('... callbacks an error when max is not in correct format number', (done) => {
-    getEventsbyRange('ABC', 1, 'ABC', (err) => {
-      assert.that(err).is.equalTo('Error in typof min parameter. Parameter is missing or in not correct format');
-      done();
-    });
+  it('... rejects an error when max is not a a ISO 8601 timestamp', (done) => {
+    (async () => {
+      try {
+        await events.getEventsByRange('abc', moment().toISOString(), '123x');
+      } catch (err) {
+        assert.that(err).is.equalTo('Function is called without max value or value is not a ISO 8601 timestamp');
+        done();
+      }
+    })();
   });
 
-  it('... callbacks an error when min is greater as the max parameter', (done) => {
-    getEventsbyRange('ABC', 10, 9, (err) => {
-      assert.that(err).is.equalTo('Error in definition of the range. The min parameter is greater as than max');
-      done();
-    });
+  it('... rejects an error when min value is greater than the max value', (done) => {
+    (async () => {
+      try {
+        await events.getEventsByRange('abc', moment().add(3, 'd').toISOString(), moment().toISOString());
+      } catch (err) {
+        assert.that(err).is.equalTo('Function is called with a greater max value as min value. We are not in movie "Back to future" :-)');
+        done();
+      }
+    })();
   });
 
-  it('... create Testdata', (done) => {
-    mdbhandler.bulk({ collection: 'events', doc: testData }, (err) => {
-      if (err) {
+  it('... must collect the correct events from the database', (done) => {
+    (async () => {
+      try {
+        const aggregateId = new ObjectID();
+
+        await database.event().insertMany([
+          { aggregateId, timestamp: moment().subtract(3, 'y').subtract(4, 'h').toISOString(), payload: { foo: 'bar' }},
+          { aggregateId, timestamp: moment().subtract(3, 'y').subtract(3, 'h').toISOString(), payload: { foo: 'bar1' }},
+          { aggregateId, timestamp: moment().subtract(3, 'y').subtract(2, 'h').toISOString(), payload: { foo: 'bar2' }},
+          { aggregateId, timestamp: moment().subtract(3, 'y').subtract(1, 'h').toISOString(), payload: { foo: 'bar3' }}
+        ]);
+
+        const res = await events.getEventsByRange(aggregateId, moment().subtract(3, 'y').subtract(3.5, 'h').toISOString(), moment().subtract(3, 'y').subtract(2, 'h').toISOString());
+
+        assert.that(res.length).is.equalTo(2);
+        assert.that(res[0].payload.foo).is.equalTo('bar1');
+        assert.that(res[1].payload.foo).is.equalTo('bar2');
+        done();
+      } catch (err) {
         throw err;
       }
-
-      done();
-    });
-  });
-
-  it('... callbacks the correct complete data', (done) => {
-    getEventsbyRange('58c7cacd58c3b54cf2b56f76', 1490001056, 1490009056, (err, res) => {
-      if (err) {
-        throw err;
-      }
-
-      assert.that(res.length).is.equalTo(4);
-      done();
-    });
-  });
-
-  it('... callbacks the correct data with range', (done) => {
-    getEventsbyRange('58c7cacd58c3b54cf2b56f76', 1490002056, 1490009056, (err, res) => {
-      if (err) {
-        throw err;
-      }
-
-      assert.that(res.length).is.equalTo(3);
-      done();
-    });
+    })();
   });
 });

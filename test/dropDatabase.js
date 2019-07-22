@@ -2,20 +2,21 @@
 
 const MongoClient = require('mongodb').MongoClient;
 
+/* eslint-disable */
+
 const dropDatabase = function (callback) {
-  MongoClient.connect('mongodb://localhost:27017/mdbtest', (err, db) => {
-    if (err) {
-      return callback(err);
-    }
+  (async () => {
+    let db = await MongoClient.connect('mongodb://127.0.0.1:27017/test', {
+            useNewUrlParser: true
+          });
 
-    db.dropDatabase((err2) => {
-      if (err2) {
-        return callback(err2);
-      }
+    db = await db.db();
 
-      callback(null, true);
-    });
-  });
+    await db.dropDatabase();
+
+    console.log('############## TestDB ist dropped sucessfully ##############');
+    callback();
+  })();
 };
 
 module.exports = dropDatabase;

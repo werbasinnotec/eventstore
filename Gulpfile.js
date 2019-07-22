@@ -6,6 +6,8 @@ const gulp = require('gulp');
 const mocha = require('gulp-mocha');
 const shell = require('gulp-shell');
 
+const dropTestDB = require('./test/dropDatabase');
+
 const paths = {
   analyze: [ '**/*.js', '!example/**/*.js', '!coverage/**/*.js', '!test/testPattern.js' ],
   tests: [ 'test/**/*Test.js', '!coverage/**/*.js' ]
@@ -13,22 +15,31 @@ const paths = {
 
 /* eslint-disable no-process-exit */
 gulp.task('test', () => {
-  return gulp.src(paths.tests, { read: false }).
-	pipe(mocha({ timeout: 55000 })).
-	once('error', function (err) {
-  /* eslint-disable no-console */
-  console.log(err.stack);
-  /* eslint-enable no-console*/
-  process.exit(1);
-	}).
-	once('end', function () {
-  process.exit();
-	});
+  dropTestDB((err) => {
+    if (err) {
+      throw err;
+    }
+    return gulp.src(paths.tests, { read: false }).
+      pipe(mocha({ timeout: 55000 })).
+      once('error', function (err2) {
+      /* eslint-disable no-console */
+      console.log(err2.stack);
+      /* eslint-enable no-console*/
+      process.exit(1);
+      }).
+      once('end', function () {
+      process.exit();
+      });
+  });
 });
 
-gulp.task('lint', function () {
+gulp.task('lint', () => {
   return gulp.src(paths.analyze).
-		pipe(eslint()).
+		pipe(eslint({
+      parserOptions: {
+        ecmaVersion: 8
+      }
+    })).
     pipe(eslint.format()).
     pipe(eslint.failAfterError());
 });

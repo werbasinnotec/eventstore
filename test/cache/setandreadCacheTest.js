@@ -1,7 +1,7 @@
 'use strict';
 
 const assert = require('assertthat');
-const cache = require('../../lib/cache/setandreadCache');
+const cache = require('../../lib/cache');
 
 describe('cache.read...', () => {
   it('... is of type function', (done) => {

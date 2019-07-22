@@ -1,61 +1,86 @@
 'use strict';
 
 const assert = require('assertthat');
-const saveEvent = require('../../lib/events/saveEvent');
+const path = require('path');
+const events = require(path.resolve('./lib/events'));
 
-describe('saveEvent...', () => {
+describe('events.saveEvent...', () => {
   it('... is of type function', (done) => {
-    assert.that(saveEvent).is.ofType('function');
+    assert.that(events.saveEvent).is.ofType('function');
     done();
   });
 
-  it('... callbacks an error when obj is not defined', (done) => {
-    saveEvent(undefined, (err) => {
-      assert.that(err).is.equalTo('Function is called without data-object');
-      done();
-    });
+  it('... rejects an error when object is not complete', (done) => {
+    (async () => {
+      try {
+        await events.saveEvent();
+      } catch (err) {
+        assert.that(err).is.equalTo('Function is called without complete information');
+        done();
+      }
+    })();
   });
 
-  it('... callbacks an error when no aggreagateID is defined in the object', (done) => {
-    saveEvent({}, (err) => {
-      assert.that(err).is.equalTo('Function is called without aggreagateID');
-      done();
-    });
-  });
+  it('... resolves the revision when process is done', (done) => {
+    (async () => {
+      try {
+        const res = await events.saveEvent({
+          aggregateId: '5d305ea072a5bd14971b54ad',
+          aggregate: 'person',
+          context: 'personservice',
+          payload: {
+            foo: 'bar'
+          }
+        });
 
-  it('... callbacks an error when no aggreagateID is defined in the object', (done) => {
-    saveEvent({ aggregateID: '58cc4fb453d1ae58de792f27' }, (err) => {
-      assert.that(err).is.equalTo('Function is called without aggregate');
-      done();
-    });
-  });
-
-  it('... callbacks an error when no payload is defined in the object', (done) => {
-    saveEvent({ aggregateID: '58cc4fb453d1ae58de792f27', aggregate: 'billing' }, (err) => {
-      assert.that(err).is.equalTo('Function is called without payload');
-      done();
-    });
-  });
-
-  it('... callbacks true when event is saved', (done) => {
-    saveEvent({ aggregateID: '58cc4fb453d1ae58de792f27', aggregate: 'billing', context: 'active', payload: { foo: 'bar' }}, (err, res) => {
-      if (err) {
+        assert.that(res.revision).is.equalTo(0);
+        done();
+      } catch (err) {
         throw err;
       }
-
-      assert.that(res).is.true();
-      done();
-    });
+    })();
   });
 
-  it('... callbacks true when event is saved - again', (done) => {
-    saveEvent({ aggregateID: '58cc4fb453d1ae58de792f27', aggregate: 'billing', context: 'active', payload: { foo: 'bar' }}, (err, res) => {
-      if (err) {
+  it('... resolves the next revision when process is done', (done) => {
+    (async () => {
+      try {
+        const res = await events.saveEvent({
+          aggregateId: '5d305ea072a5bd14971b54ad',
+          aggregate: 'person',
+          context: 'personservice',
+          payload: {
+            foo: 'bar',
+            bar: 'foo'
+          }
+        });
+
+        assert.that(res.revision).is.equalTo(1);
+        done();
+      } catch (err) {
         throw err;
       }
+    })();
+  });
 
-      assert.that(res).is.true();
-      done();
-    });
+  it('... resolves the third revision when process is done', (done) => {
+    (async () => {
+      try {
+        const res = await events.saveEvent({
+          aggregateId: '5d305ea072a5bd14971b54ad',
+          aggregate: 'person',
+          context: 'personservice',
+          payload: {
+            foo: 'bar',
+            bar: 'foo',
+            werbas: 'AG'
+          }
+        });
+
+        assert.that(res.revision).is.equalTo(2);
+        done();
+      } catch (err) {
+        throw err;
+      }
+    })();
   });
 });
